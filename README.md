@@ -1,4 +1,5 @@
 # XCP – eXtended Content Protocol  
+**Author:** Rogério Figurelli  
 **White Paper Version 1.0**
 
 **Filename:** `XCP_eXtended_Content_Protocol_White_Paper_v1_0.md`  

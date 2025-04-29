@@ -140,8 +140,10 @@ a universal, meaning-first communication substrate connecting islands of legacy 
     "message_id": "123e4567-e89b-12d3-a456-426614174000",
     "session_id": "session-abc-987",
     "timestamp": "2025-04-28T15:30:00Z",
-    "from": "device://sensor001",
-    "to": "service://weather_collector",
+    "from": "mqtt://sensor001",
+    "to": "xcp://weather_collector",
+    "origin_protocol": "MQTT",
+    "target_protocol": "XCP",
     "method": "POST",
     "priority": "normal",
     "auth_token": "Bearer eyJhbGciOiJIUzI1NiIsIn..."
@@ -163,15 +165,35 @@ a universal, meaning-first communication substrate connecting islands of legacy 
         "semantic_type": "RelativeHumidity",
         "timestamp": "2025-04-28T15:29:58Z"
       }
+    },
+    "gateway_metadata": {
+      "conversion_timestamp": "2025-04-28T15:30:00Z",
+      "conversion_status": "Success",
+      "notes": "Message received over MQTT, normalized to XCP format."
     }
   }
 }
 ```
+## Key Observations
 
-**Key Observations:**
-- Data fields are semantically clear.
-- Timestamp, unit, type, and accuracy are embedded.
-- Message structure enables autonomous validation and interpretation.
+- **Data fields are semantically clear:**  
+  Each telemetry entry explicitly defines its `semantic_type`, enabling systems to interpret the meaning of data autonomously without relying on external schemas or manual configurations.
+
+- **Timestamp, unit, type, and accuracy are embedded:**  
+  Measurements include critical metadata such as measurement time (`timestamp`), measurement unit (`unit`), semantic classification (`semantic_type`), and optional precision indicators (`accuracy`).  
+  This embedded metadata ensures higher reliability, traceability, and context for data-driven decisions.
+
+- **Message structure enables autonomous validation and interpretation:**  
+  The XCP envelope (`xcp_header` + `xcp_body`) is designed for self-validation and self-description.  
+  Systems can verify the completeness, authenticity, and contextual meaning of received messages without external negotiation.
+
+- **Explicit gateway fields enhance protocol translation transparency:**  
+  Fields such as `origin_protocol` and `target_protocol` in the `xcp_header` explicitly declare the source and destination communication standards involved in the message exchange.  
+  This allows systems to understand the original protocol context and manage interoperability seamlessly.
+
+- **Gateway metadata captures the conversion process:**  
+  The optional `gateway_metadata` block inside the `xcp_body` documents the status, timestamp, and notes about the protocol translation performed by the XCP Gateway.  
+  This enriches the message with a transparent trace of how and when the transformation occurred, providing auditability and operational insights.
 
 ---
 

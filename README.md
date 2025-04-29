@@ -30,7 +30,7 @@ XCP aims to create a world where any device, agent, or service can communicate *
 
 ## 📄 Latest Version
 
-[Download White Paper (Markdown)](./XCP_eXtended_Content_Protocol_White_Paper_v1_0.md)
+[Download White Paper (Markdown)](https://github.com/rfigurelli/XCP-eXtended-Content-Protocol/blob/main/XCP_eXtended_Content_Protocol%20_White_Paper_v1_0.md)
 
 ---
 
